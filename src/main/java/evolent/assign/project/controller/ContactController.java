@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import evolent.assign.project.business.ContactBusiness;
 import evolent.assign.project.exception.ContactNotFoundException;
-import evolent.assign.project.model.Contacts;
+import evolent.assign.project.model.ContactDTO;
 
 @RestController
 @RequestMapping("/api/")
@@ -23,19 +23,25 @@ public class ContactController {
 	private ContactBusiness contactBusiness;
 	
 	@PostMapping("/contact")
-	public Contacts createContact(@RequestBody Contacts contacts) {
+	public ContactDTO createContact(@RequestBody ContactDTO contacts) {
 		return contactBusiness.addContact(contacts);
 	}
 	
 	@GetMapping("contact/{id}")
-	public ResponseEntity<Contacts> getContactById(@PathVariable(value = "id") long id) throws ContactNotFoundException{
-		Contacts contacts = contactBusiness.getContact(id);
+	public ResponseEntity<ContactDTO> getContactById(@PathVariable(value = "id") long id) throws ContactNotFoundException{
+		ContactDTO contacts = contactBusiness.getContactById(id);
 		return ResponseEntity.ok().body(contacts);
 		
 	}
-	
+	@PostMapping("contact/{id}")
+	public String updateStatusContactById(@PathVariable(value = "id") long id) throws ContactNotFoundException{
+		boolean isStatus = contactBusiness.updateStatusContactById(id);
+		String message  =  isStatus == true ? "Updated successfully" : "No record found and update not successfully";
+		return message;
+		
+	}
 	@GetMapping("/allcontacts")
-	public List<Contacts> getAllContactInfo(){
+	public List<ContactDTO> getAllContactInfo(){
 		return contactBusiness.getAllContacts();
 	}
 	

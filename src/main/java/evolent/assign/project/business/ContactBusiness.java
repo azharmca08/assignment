@@ -1,18 +1,17 @@
 package evolent.assign.project.business;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.stereotype.Component;
 
-import evolent.assign.project.entity.Contact;
 import evolent.assign.project.exception.ContactNotFoundException;
-import evolent.assign.project.model.Contacts;
+import evolent.assign.project.model.ContactDTO;
 
 @Component
 public interface ContactBusiness {
 
-	public Contacts addContact(Contacts contact);
-	public List<Contacts> getAllContacts();
-	public Contacts getContact(long id) throws ContactNotFoundException;
+	public ContactDTO addContact(ContactDTO contact);
+	public List<ContactDTO> getAllContacts();
+	public ContactDTO getContactById(long id) throws ContactNotFoundException;
+	public boolean updateStatusContactById(long id) throws ContactNotFoundException;
 }

@@ -1,6 +1,6 @@
 package evolent.assign.project.model;
 
-public class Contacts {
+public class ContactDTO {
 
 	private long id;
 	private String firstName;

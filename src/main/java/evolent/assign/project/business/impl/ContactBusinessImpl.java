@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 import evolent.assign.project.business.ContactBusiness;
 import evolent.assign.project.entity.Contact;
 import evolent.assign.project.exception.ContactNotFoundException;
-import evolent.assign.project.model.Contacts;
+import evolent.assign.project.model.ContactDTO;
 import evolent.assign.project.service.ContactService;
 
 @Component
@@ -20,8 +20,8 @@ public class ContactBusinessImpl implements ContactBusiness {
 	private ContactService contactService;
 	
 	@Override
-	public Contacts addContact(Contacts contact) {
-		Contacts contacts = new Contacts();
+	public ContactDTO addContact(ContactDTO contact) {
+		ContactDTO contacts = new ContactDTO();
 		Contact con = contactService.addContact(contact);
 		contacts.setFirstName(con.getFirstName());
 		contacts.setLastName(con.getLastName());
@@ -31,11 +31,11 @@ public class ContactBusinessImpl implements ContactBusiness {
 	}
 
 	@Override
-	public List<Contacts> getAllContacts() {
+	public List<ContactDTO> getAllContacts() {
 		List<Contact> contactList = contactService.getAllContacts();
-		List<Contacts> contactLists = new ArrayList<>();
+		List<ContactDTO> contactLists = new ArrayList<>();
 		for(Contact contact : contactList) {
-			Contacts cont = new Contacts();
+			ContactDTO cont = new ContactDTO();
 			cont.setId(contact.getId());
 			cont.setFirstName(contact.getFirstName());
 			cont.setLastName(contact.getLastName());
@@ -48,9 +48,9 @@ public class ContactBusinessImpl implements ContactBusiness {
 	}
 
 	@Override
-	public Contacts getContact(long id) throws ContactNotFoundException {
-		Optional<Contact> contactEntity = contactService.getContact(id);
-		Contacts contact = new Contacts();
+	public ContactDTO getContactById(long id) throws ContactNotFoundException {
+		Optional<Contact> contactEntity = contactService.getContactById(id);
+		ContactDTO contact = new ContactDTO();
 		if(contactEntity.isPresent()) {
 			contact.setId(contactEntity.get().getId());
 			contact.setFirstName(contactEntity.get().getFirstName());
@@ -64,6 +64,11 @@ public class ContactBusinessImpl implements ContactBusiness {
 		
 		return contact;
 		
+	}
+
+	@Override
+	public boolean updateStatusContactById(long id) throws ContactNotFoundException {
+		return contactService.updateStatusContactById(id);
 	}
 
 }
