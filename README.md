@@ -1,7 +1,8 @@
 # assignment
 Evolent assignment project
 
-This is simple spring boot assignment project. that you can exceute this application by importing in STS and simply run this application and below are the End points.
+This is simple spring boot assignment project. that you can execute this application by importing in STS and simply run this application and below are the End points. 
+using H2 Database as in-memory Database.
 
 To add contacts one -by - one  :
 Method/URL -  POST  :   http://localhost:8080/api/contact
