@@ -6,7 +6,7 @@ public class ContactDTO {
 	private String firstName;
 	private String lastName;
 	private String mobile;
-	private boolean status;
+	private String status;
 	
 	public long getId() {
 		return id;
@@ -32,12 +32,13 @@ public class ContactDTO {
 	public void setMobile(String mobile) {
 		this.mobile = mobile;
 	}
-	public boolean isStatus() {
+	public String getStatus() {
 		return status;
 	}
-	public void setStatus(boolean status) {
+	public void setStatus(String status) {
 		this.status = status;
 	}
+	
 
 
 }

@@ -46,7 +46,7 @@ public class ContactServiceImpl implements ContactService {
 			con.setFirstName(contact.get().getFirstName());
 			con.setLastName(contact.get().getLastName());
 			con.setMobile(contact.get().getMobile());
-			con.setStatus(false);
+			con.setStatus(contact.get().isStatus() == true ? false : true);
 			repo.save(con);
 			return true;
 		}	

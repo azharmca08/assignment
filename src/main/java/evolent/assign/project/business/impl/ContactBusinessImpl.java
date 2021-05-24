@@ -26,7 +26,6 @@ public class ContactBusinessImpl implements ContactBusiness {
 		contacts.setFirstName(con.getFirstName());
 		contacts.setLastName(con.getLastName());
 		contacts.setMobile(con.getMobile());
-		contacts.setStatus(con.isStatus());
 		return contacts;
 	}
 
@@ -34,16 +33,16 @@ public class ContactBusinessImpl implements ContactBusiness {
 	public List<ContactDTO> getAllContacts() {
 		List<Contact> contactList = contactService.getAllContacts();
 		List<ContactDTO> contactLists = new ArrayList<>();
-		for(Contact contact : contactList) {
+		contactList.forEach(contact ->{
 			ContactDTO cont = new ContactDTO();
 			cont.setId(contact.getId());
 			cont.setFirstName(contact.getFirstName());
 			cont.setLastName(contact.getLastName());
 			cont.setMobile(contact.getMobile());
-			cont.setStatus(contact.isStatus());
-			contactLists.add(cont);
-		}
-		
+			String status = contact.isStatus() ? "ACTIVE" : "IN-ACTIVE";
+			cont.setStatus(status);
+			contactLists.add(cont);	
+		});
 		return contactLists;
 	}
 
@@ -56,7 +55,8 @@ public class ContactBusinessImpl implements ContactBusiness {
 			contact.setFirstName(contactEntity.get().getFirstName());
 			contact.setLastName(contactEntity.get().getLastName());
 			contact.setMobile(contactEntity.get().getMobile());
-			contact.setStatus(contactEntity.get().isStatus());
+			String status = contactEntity.get().isStatus() ? "ACTIVE" : "IN-ACTIVE";
+			contact.setStatus(status);
 			
 		}else {
 			throw new ContactNotFoundException("Invalid Request or Record is not available in our records");
